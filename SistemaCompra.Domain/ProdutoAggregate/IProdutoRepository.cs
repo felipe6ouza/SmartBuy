@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace SistemaCompra.Domain.ProdutoAggregate
 {
-    public interface IProdutoRepository
+    public interface IProdutoRepository 
     {
         Produto Obter(Guid id);
         void Registrar(Produto entity);
