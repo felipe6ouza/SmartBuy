@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SistemaCompra.Domain.Core.Model;
 using SistemaCompra.Domain.SolicitacaoCompraAggregate;
 using System;
-using System.Reflection.Emit;
 using SolicitacaoCompraAgg = SistemaCompra.Domain.SolicitacaoCompraAggregate;
 
 namespace SistemaCompra.Infra.Data.SolicitacaoCompra
@@ -26,6 +25,7 @@ namespace SistemaCompra.Infra.Data.SolicitacaoCompra
     {
         public void Configure(EntityTypeBuilder<Item> builder)
         {
+            builder.ToTable("ItensCompra");
             builder.HasKey(i =>  i.Id);
             builder.Property(i => i.Qtde).IsRequired();
         }

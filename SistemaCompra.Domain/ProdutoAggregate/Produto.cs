@@ -3,8 +3,10 @@ using SistemaCompra.Domain.Core.Model;
 using SistemaCompra.Domain.ProdutoAggregate.Events;
 using System;
 
+
 namespace SistemaCompra.Domain.ProdutoAggregate
 {
+    
     public class Produto : Entity
     {
         public Categoria Categoria { get; private set; }
