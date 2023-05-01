@@ -16,6 +16,9 @@ namespace SistemaCompra.Domain.SolicitacaoCompraAggregate
         public DateTime Data { get; private set; }
         public Money TotalGeral { get; private set; }
         public Situacao Situacao { get; private set; }
+        public CondicaoPagamento CondicaoPagamento { get; private set; }
+        
+        private const decimal VALOR_LIMITE_CONDICAO_PAGAMENTO = 50000m;
 
         private SolicitacaoCompra() { }
 
@@ -35,7 +38,26 @@ namespace SistemaCompra.Domain.SolicitacaoCompraAggregate
 
         public void RegistrarCompra(IEnumerable<Item> itens)
         {
-           
+            if (!itens.Any())
+                 throw new BusinessRuleException("A solicitação de compra deve possuir itens!");
+
+            if (CalcularTotalGeral(itens).Value > VALOR_LIMITE_CONDICAO_PAGAMENTO)
+                CondicaoPagamento = new CondicaoPagamento(30);
+
+            AddEvent(new CompraRegistradaEvent(Id, itens, TotalGeral.Value));
         }
+
+        private Money CalcularTotalGeral(IEnumerable<Item> itens)
+        {
+            TotalGeral = new Money();
+
+            foreach (var item in itens)
+            {
+                TotalGeral = TotalGeral.Add(new Money(item.Subtotal.Value));
+            }
+
+            return TotalGeral;
+        }
+
     }
 }

@@ -20,8 +20,8 @@ namespace SistemaCompra.Domain.Test.SolicitacaoCompraAggregate
             //Quando
             solicitacao.RegistrarCompra(itens);
 
-            //Então
-            //Assert.Equal(30, solicitacao.CondicaoPagamento.Valor);
+           // Então
+            Assert.Equal(30, solicitacao.CondicaoPagamento.Valor);
         }
 
         [Fact]
