@@ -1,18 +1,11 @@
-using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using SistemaCompra.Application.Produto;
-using SistemaCompra.Domain.ProdutoAggregate;
-using SistemaCompra.Domain.SolicitacaoCompraAggregate;
-using SistemaCompra.Infra.Data;
-using SistemaCompra.Infra.Data.Produto;
-using SistemaCompra.Infra.Data.UoW;
+using SistemaCompra.API.Setup;
 using System;
 
 namespace SistemaCompra.API
@@ -34,14 +27,7 @@ namespace SistemaCompra.API
             services.AddAutoMapper(assembly);
             services.AddSignalR();
 
-            services.AddScoped<IProdutoRepository, ProdutoRepository>();
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-
-            services.AddDbContext<SistemaCompraContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection"), 
-                    o=> o.MigrationsAssembly("SistemaCompra.API"))
-            );
+            services.RegisterServices(Configuration);
 
             services.AddSwaggerGen(c =>
             {
