@@ -29,6 +29,7 @@ namespace SistemaCompra.Domain.SolicitacaoCompraAggregate
             NomeFornecedor = new NomeFornecedor(nomeFornecedor);
             Data = DateTime.Now;
             Situacao = Situacao.Solicitado;
+            Itens = new List<Item>();
         }
 
         public void AdicionarItem(Produto produto, int qtde)

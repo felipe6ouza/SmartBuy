@@ -29,7 +29,7 @@ namespace SistemaCompra.Infra.Data.Produto
             return context.Set<ProdutoAgg.Produto>().Where(c=> c.Id == id).FirstOrDefault();
         }
 
-        public IEnumerable<ProdutoAgg.Produto> ObterProdutos(List<Guid> listaProdutos)
+        public IEnumerable<ProdutoAgg.Produto> ObterProdutos(IEnumerable<Guid> listaProdutos)
         {
             return context.Produtos.Where(c => listaProdutos.Contains(c.Id)).ToList();
         }

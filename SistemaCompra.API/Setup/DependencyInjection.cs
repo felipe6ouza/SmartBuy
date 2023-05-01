@@ -6,6 +6,7 @@ using SistemaCompra.Application.Produto.Command.AtualizarPreco;
 using SistemaCompra.Application.Produto.Command.RegistrarProduto;
 using SistemaCompra.Application.Produto.Query.ObterProduto;
 using SistemaCompra.Application.SolicitacaoCompra.Command.RegistrarCompra;
+using SistemaCompra.Application.SolicitacaoCompra.Events;
 using SistemaCompra.Domain.ProdutoAggregate;
 using SistemaCompra.Domain.ProdutoAggregate.Events;
 using SistemaCompra.Domain.SolicitacaoCompraAggregate;
@@ -35,6 +36,7 @@ namespace SistemaCompra.API.Setup
             //Events
             services.AddScoped<INotificationHandler<PrecoAtualizadoEvent>, PrecoAtualizadoEventHandler>();
             services.AddScoped<INotificationHandler<CompraRegistradaEvent>, CompraRegistradaEventHandler>();
+            services.AddScoped<INotificationHandler<FalhaProcessamentoCompraEvent>, FalhaProcessamentoCompraEventHandler>();
 
             //Querys
             services.AddScoped<IRequestHandler<ObterProdutoQuery, ObterProdutoViewModel>, ObterProdutoQueryHandler>();

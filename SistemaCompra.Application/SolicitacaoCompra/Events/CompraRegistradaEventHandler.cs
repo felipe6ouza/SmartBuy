@@ -3,7 +3,7 @@ using SistemaCompra.Domain.SolicitacaoCompraAggregate.Events;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SistemaCompra.Application.SolicitacaoCompra.Command.RegistrarCompra
+namespace SistemaCompra.Application.SolicitacaoCompra.Events
 {
     public class CompraRegistradaEventHandler : INotificationHandler<CompraRegistradaEvent>
     {
