@@ -11,7 +11,7 @@ namespace SistemaCompra.Infra.Data.Produto
         public void Configure(EntityTypeBuilder<ProdutoAgg.Produto> builder)
         {
             builder.ToTable("Produto");
-            builder.Property(c => c.Preco).HasConversion(m => m.Value, v => new Money(v)).IsRequired();
+            builder.Property(c => c.Preco).HasConversion(m => m.Value, v => new Money(v));
 
         }
     }
