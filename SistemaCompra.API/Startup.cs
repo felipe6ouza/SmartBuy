@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using SistemaCompra.API.Setup;
 using System;
+using System.Reflection;
 
 namespace SistemaCompra.API
 {
@@ -22,9 +23,8 @@ namespace SistemaCompra.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            var assembly = AppDomain.CurrentDomain.Load("SistemaCompra.Application");
-            services.AddMediatR(assembly);
-            services.AddAutoMapper(assembly);
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly())); 
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddSignalR();
 
             services.RegisterServices(Configuration);
