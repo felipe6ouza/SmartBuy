@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SistemaCompra.Infra.Data;
 
@@ -11,9 +12,11 @@ using SistemaCompra.Infra.Data;
 namespace SistemaCompra.API.Migrations
 {
     [DbContext(typeof(SistemaCompraContext))]
-    partial class SistemaCompraContextModelSnapshot : ModelSnapshot
+    [Migration("20230501204354_CreateCompraTable")]
+    partial class CreateCompraTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,7 +40,7 @@ namespace SistemaCompra.API.Migrations
                     b.Property<string>("Nome")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal?>("Preco")
+                    b.Property<decimal>("Preco")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Situacao")
@@ -50,7 +53,7 @@ namespace SistemaCompra.API.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("897d2297-65d7-41c9-8ddb-a34645d3568a"),
+                            Id = new Guid("12c00b0c-03ee-4a26-a39f-fe4d3602cb88"),
                             Categoria = 1,
                             Descricao = "Descricao01",
                             Nome = "Produto01",
@@ -80,7 +83,7 @@ namespace SistemaCompra.API.Migrations
 
                     b.HasIndex("SolicitacaoCompraId");
 
-                    b.ToTable("ItensCompra", (string)null);
+                    b.ToTable("Item");
                 });
 
             modelBuilder.Entity("SistemaCompra.Domain.SolicitacaoCompraAggregate.SolicitacaoCompra", b =>
