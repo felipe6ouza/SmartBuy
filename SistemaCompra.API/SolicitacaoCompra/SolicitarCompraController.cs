@@ -11,15 +11,13 @@ namespace SistemaCompra.API.SolicitacaoCompra
         public SolicitarCompraController(IMediator mediator) => _mediator = mediator;
 
         [HttpPost, Route("compra/solicitar")]
-        [ProducesResponseType(201)]
+        [ProducesResponseType(202)]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
         public IActionResult SolicitarCompra([FromBody] RegistrarCompraCommand registrarCompraCommand)
         {
             if (!ModelState.IsValid)
-            {
                 return BadRequest(new ValidationProblemDetails(ModelState));
-            }
 
             _mediator.Send(registrarCompraCommand);
             return Accepted();
