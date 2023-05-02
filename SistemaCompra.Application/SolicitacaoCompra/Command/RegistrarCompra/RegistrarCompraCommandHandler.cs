@@ -30,13 +30,13 @@ namespace SistemaCompra.Application.SolicitacaoCompra.Command.RegistrarCompra
             var idsProdutosSolicitacaoCompra = request.Itens.Select(c => c.Id).AsEnumerable();
             var produtos = _produtoRepository.ObterProdutos(idsProdutosSolicitacaoCompra);
 
-            if (!produtos.Any() || !produtos.All(p => idsProdutosSolicitacaoCompra.Contains(p.Id)))
+            if (!produtos.Any() || !idsProdutosSolicitacaoCompra.All(id => produtos.Any(p => p.Id == id)))
             {
                 var message = "Não foi possível encontrar um ou mais produtos associados à solicitação compra"; 
                 
                 await _mediator.Publish(new FalhaProcessamentoCompraEvent(compra.Id, message), cancellationToken);
 
-                return await Task.FromResult(true);
+                return await Task.FromResult(false);
             }
 
             foreach (var produto in produtos)
