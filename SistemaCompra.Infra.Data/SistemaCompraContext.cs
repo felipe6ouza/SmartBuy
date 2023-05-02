@@ -28,9 +28,8 @@ namespace SistemaCompra.Infra.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseLoggerFactory(loggerFactory)  
-                .EnableSensitiveDataLogging()
-                .UseSqlServer(@"Server=localhost,1433; User=sa;Password=TheStore@123; Database=SistemaCompraDb;TrustServerCertificate=True");
+            optionsBuilder.UseLoggerFactory(loggerFactory)
+                .EnableSensitiveDataLogging();
         }
     }
 }
